@@ -1,6 +1,7 @@
 package com.mytaxi.android_demo.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -58,6 +60,10 @@ public class AuthenticationActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 attemptLogin();
             }
         });
@@ -77,7 +83,8 @@ public class AuthenticationActivity extends AppCompatActivity {
                     Log.i(LOG_TAG, "Successful login with user: " + username);
                 } else {
                     View view = findViewById(android.R.id.content);
-                    Snackbar.make(view, R.string.message_login_fail, Snackbar.LENGTH_LONG).show();
+
+                        Snackbar.make(view, R.string.message_login_fail, Snackbar.LENGTH_LONG).show();
                     Log.i(LOG_TAG, "Failed login with user: " + username);
                 }
             }

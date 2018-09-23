@@ -15,6 +15,7 @@ import com.mytaxi.android_demo.testdata.TestData;
 import com.mytaxi.android_demo.testdata.TestSettings;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +32,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.mytaxi.android_demo.R.id.nav_logout;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Created by sraj2 on 9/22/18.
@@ -46,6 +48,13 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
     @Rule
     public ActivityTestRule<MainActivity> mactivityRule = new ActivityTestRule<>(MainActivity.class);
 
+   @BeforeClass
+   public static void init()
+   {
+       new TestSettings()
+               .initialize();
+   }
+
     @Before
     public void setUp() throws InterruptedException {
         new TestSettings()
@@ -57,7 +66,7 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
     @Test
     public void Search() throws InterruptedException {
         mactivityRule.getActivity();
-        onView(ViewMatchers.withId(R.id.textSearch)).perform(click());
+        onView(withId(R.id.textSearch)).perform(click());
         try {
         onView(withId(R.id.textSearch))
                 .perform(typeText(TestData.searchText));
@@ -106,11 +115,13 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
 
 
     public void logOut() throws InterruptedException {
-        mactivityRule.getActivity();
         smallWait();
-        onView(withContentDescription(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_logout));
-       // onView(withContentDescription(mactivityRule.getActivity().getString(R.string.navigation_drawer_open))).perform(click());
-        onView(withId(nav_logout)).perform(click());
+        onView(withContentDescription(mactivityRule.getActivity().getString(R.string.navigation_drawer_open))).perform(click());
+        smallWait();
+       /* onView(withId(R.id.nav_logout)).check(matches(isDisplayed()));
+        onView(withId(R.id.nav_logout)).perform(click());*/
+        onView(allOf(withText(R.string.text_item_title_logout), isDisplayed()));
+        onView(allOf(withText(R.string.text_item_title_logout), isDisplayed())).perform(click());
     }
 
 

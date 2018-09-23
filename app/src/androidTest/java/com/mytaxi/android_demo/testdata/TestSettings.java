@@ -18,6 +18,9 @@ public class TestSettings {
 		grantPermission(Manifest.permission.READ_CONTACTS);
 		grantPermission(Manifest.permission.SET_ANIMATION_SCALE);
 		grantPermission(Manifest.permission.RECEIVE_SMS);
+		grantPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+		grantPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
+		grantPermission(Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS);
 		disableAnimations();
 		return this;
 	}
