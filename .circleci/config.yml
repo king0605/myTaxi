@@ -29,12 +29,12 @@ jobs:
           command: ./gradlew assembledebugAndroidTest
          
      - run: 
-          name: gradle build
-         command: ./gradle build
+          name: Run gradle build
+          command: gradle build
 
     - run: 
-          name: gradle assembledebug
-          command: ./gradle assembledebug
+          name: Run gradle assembledebug
+          command: gradle assembledebug
           
       - store_artifacts:
           path: app/build/reports
