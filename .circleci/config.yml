@@ -33,8 +33,7 @@ jobs:
           name: Run gradle assembledebug
           command: ./gradle assembledebug
           
-      - test:
-          - override:
+      - run:    
     # start the emulator
       - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
