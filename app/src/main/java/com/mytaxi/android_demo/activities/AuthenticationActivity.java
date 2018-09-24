@@ -60,6 +60,10 @@ public class AuthenticationActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
+
+               /* Added code to handle error message displayed on incorrect login by hiding softkeyboard,
+                as user was unable to see the error message
+                 */
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
