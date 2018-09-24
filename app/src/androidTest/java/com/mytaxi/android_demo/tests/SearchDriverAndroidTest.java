@@ -43,17 +43,16 @@ import static org.hamcrest.core.AllOf.allOf;
 public class SearchDriverAndroidTest extends CommonMyTaxi {
 
     @Rule
-    public  ActivityTestRule<AuthenticationActivity> mlogInRule = new ActivityTestRule<>(AuthenticationActivity.class);
+    public ActivityTestRule<AuthenticationActivity> mlogInRule = new ActivityTestRule<>(AuthenticationActivity.class);
 
     @Rule
     public ActivityTestRule<MainActivity> mactivityRule = new ActivityTestRule<>(MainActivity.class);
 
-   @BeforeClass
-   public static void init()
-   {
-       new TestSettings()
-               .initialize();
-   }
+    @BeforeClass
+    public static void init() {
+        new TestSettings()
+                .initialize();
+    }
 
     @Before
     public void setUp() throws InterruptedException {
@@ -68,25 +67,20 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
         mactivityRule.getActivity();
         onView(withId(R.id.textSearch)).perform(click());
         try {
-        onView(withId(R.id.textSearch))
-                .perform(typeText(TestData.searchText));
-        onView(withText(TestData.driverName))
-                .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
-        onView(withText(TestData.driverName))
-                .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
-                .perform(click());
+            onView(withId(R.id.textSearch))
+                    .perform(typeText(TestData.searchText));
+            onView(withText(TestData.driverName))
+                    .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
+                    .check(matches(isDisplayed()));
+            onView(withText(TestData.driverName))
+                    .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
+                    .perform(click());
 
-        }
-        catch (Exception e)
-        {
-        e.getStackTrace();
-        }
-        try {
-           /**
-             This code will be executed as a workaround, if the AutoCompleteTextView popup doesn't show up;
+        } catch (Exception e) {
+            /**
+             This code will be executed as a fallback, if the AutoCompleteTextView popup doesn't show up;
              unable to replicate but few times saw AutoCompleteTextView failed to display
-            */
+             */
 
             onView(withText(TestData.driverName))
                     .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
@@ -102,11 +96,6 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
             onView(withText(TestData.driverName))
                     .inRoot(withDecorView(not(is(mactivityRule.getActivity().getWindow().getDecorView()))))
                     .perform(click());
-
-        }
-        catch (Exception e)
-        {
-            e.getStackTrace();
         }
         callDriver();
         logOut();
@@ -118,12 +107,9 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
         smallWait();
         onView(withContentDescription(mactivityRule.getActivity().getString(R.string.navigation_drawer_open))).perform(click());
         smallWait();
-       /* onView(withId(R.id.nav_logout)).check(matches(isDisplayed()));
-        onView(withId(R.id.nav_logout)).perform(click());*/
         onView(allOf(withText(R.string.text_item_title_logout), isDisplayed()));
         onView(allOf(withText(R.string.text_item_title_logout), isDisplayed())).perform(click());
     }
-
 
 
 }
