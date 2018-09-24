@@ -45,18 +45,8 @@ import static org.hamcrest.core.AllOf.allOf;
 @RunWith(AndroidJUnit4.class)
 public class SearchDriverAndroidTest extends CommonMyTaxi {
 
-  /*  @Rule
-    public  ActivityTestRule<AuthenticationActivity> mlogInRule = new ActivityTestRule<>(AuthenticationActivity.class);
-*/
     @Rule
     public ActivityTestRule<MainActivity> mactivityRule = new ActivityTestRule<>(MainActivity.class);
-
-  /* @BeforeClass
-   public static void init()
-   {
-       new TestSettings()
-               .initialize();
-   }*/
 
     @Before
     public void setUp() throws InterruptedException {
@@ -97,7 +87,7 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
         }
         try {
            /**
-             This code will be executed as a workaround, if the AutoCompleteTextView popup doesn't show up;
+             This code will be executed as a fallback method, if the AutoCompleteTextView popup doesn't show up;
              unable to replicate but few times saw AutoCompleteTextView failed to display
             */
 
@@ -131,8 +121,6 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
 
         onView(withContentDescription(mactivityRule.getActivity().getString(R.string.navigation_drawer_open))).perform(click());
         smallWait();
-       /* onView(withId(R.id.nav_logout)).check(matches(isDisplayed()));
-        onView(withId(R.id.nav_logout)).perform(click());*/
         onView(allOf(withText(R.string.text_item_title_logout), isDisplayed()));
         onView(allOf(withText(R.string.text_item_title_logout), isDisplayed())).perform(click());
     }
@@ -141,8 +129,5 @@ public class SearchDriverAndroidTest extends CommonMyTaxi {
     public void tearDown() throws Exception {
         mactivityRule.getActivity().finish();
     }
-
-
-
 
 }
