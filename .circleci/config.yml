@@ -35,7 +35,7 @@ jobs:
             adb shell input keyevent 82
       - run:  
           name: Before install
-            - echo yes | android update sdk --all --filter build-tools-24.0.1 --no-ui --force
+          command: echo yes | android update sdk --all --filter build-tools-24.0.1 --no-ui --force
       - run:
           name: Run EspressoTests
           command: ./gradlew connectedAndroidTest
